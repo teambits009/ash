@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Ensure Axios is imported
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,15 +8,27 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleDonate = async () => {
+    try {
+      const response = await axios.post('create-payment-intent/', {
+        source: 'navbar',
+        timestamp: new Date().toISOString(),
+      });
+      alert('Donation request sent successfully!');
+      console.log('Donation response:', response.data);
+    } catch (error) {
+      alert('Failed to process donation. Please try again.');
+      console.error('Donation error:', error);
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 sticky top-0 z-20 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-3
-
-xl font-extrabold tracking-tight">
+        <div className="text-3xl font-extrabold tracking-tight">
           <img src="/images/logoo.png" alt="Ashamay Foundation logo" width="50" height="60" />
         </div>
-        {/* Hamburger Icon */}
         <button
           className="md:hidden focus:outline-none"
           onClick={toggleMenu}
@@ -36,7 +49,6 @@ xl font-extrabold tracking-tight">
             />
           </svg>
         </button>
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {['Home', 'About', 'Impact', 'Work', 'Projects', 'Join Us', 'Contact'].map((item, index) => (
             <a
@@ -47,14 +59,13 @@ xl font-extrabold tracking-tight">
               {item}
             </a>
           ))}
-          <a
-            href="#donate"
+          <button
+            onClick={handleDonate}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
           >
             Donate Now
-          </a>
+          </button>
         </div>
-        {/* Mobile Menu */}
         <div
           className={`md:hidden absolute top-16 left-0 right-0 bg-blue-900 text-white flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out ${
             isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -70,13 +81,12 @@ xl font-extrabold tracking-tight">
               {item}
             </a>
           ))}
-          <a
-            href="#donate"
+          <button
+            onClick={handleDonate}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
           >
             Donate Now
-          </a>
+          </button>
         </div>
       </div>
     </nav>
@@ -84,6 +94,21 @@ xl font-extrabold tracking-tight">
 };
 
 const Hero = () => {
+  const handleDonate = async (amount) => {
+    try {
+      const response = await axios.post('create-payment-intent/', {
+        amount: parseInt(amount),
+        source: 'hero',
+        timestamp: new Date().toISOString(),
+      });
+      alert(`Successfully processed $${amount} donation!`);
+      console.log('Donation response:', response.data);
+    } catch (error) {
+      alert('Failed to process donation. Please try again.');
+      console.error('Donation error:', error);
+    }
+  };
+
   return (
     <section id="home" className="bg-gradient-to-b from-gray-100 to-white py-24">
       <div className="container mx-auto flex flex-col items-center text-center px-4">
@@ -99,7 +124,7 @@ const Hero = () => {
             <button
               key={amount}
               className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-              onClick={() => alert(`Donating $${amount}`)}
+              onClick={() => handleDonate(amount)}
             >
               ${amount}
             </button>
@@ -260,6 +285,21 @@ const OurProjects = () => {
 };
 
 const GetInvolved = () => {
+  const handleDonate = async (amount) => {
+    try {
+      const response = await axios.post('create-payment-intent/', {
+        amount: parseInt(amount),
+        source: 'get-involved',
+        timestamp: new Date().toISOString(),
+      });
+      alert(`Successfully processed $${amount} donation!`);
+      console.log('Donation response:', response.data);
+    } catch (error) {
+      alert('Failed to process donation. Please try again.');
+      console.error('Donation error:', error);
+    }
+  };
+
   return (
     <section id="join-us" className="py-24 bg-gradient-to-b from-gray-100 to-white">
       <div className="container mx-auto flex flex-col items-center text-center px-4">
@@ -273,7 +313,7 @@ const GetInvolved = () => {
                 <button
                   key={amount}
                   className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-all duration-300"
-                  onClick={() => alert(`Donating $${amount}`)}
+                  onClick={() => handleDonate(amount)}
                 >
                   ${amount}
                 </button>
@@ -313,7 +353,7 @@ const Leadership = () => {
         <h2 className="text-4xl font-bold text-gray-800 mb-8">Our Visionary Leader</h2>
         <div className="flex flex-col items-center max-w-3xl">
           <div className="overflow-hidden w-64 h-64 bg-gray-300 rounded-full mb-6 flex items-center justify-center text-gray-600 shadow-lg">
-            <img src="/images/CEO.jpeg" alt="Fatumata Djalo's Picture" />
+            <img src="/images/CEO.jpeg" alt="Fatumata Djalo's Img" />
           </div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-2">Fatumata Djalo – Founder & Director</h3>
           <p className="text-gray-600 leading-relaxed">
