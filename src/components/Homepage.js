@@ -309,7 +309,7 @@ const GetInvolved = () => {
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">Give Hope</h3>
             <p className="text-gray-600 mb-4">Your donation, big or small, transforms lives. Support a child’s future today.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              {['3', '5', '10', '50'].map(amount => (
+              {['50', '100', '150', '200'].map(amount => (
                 <button
                   key={amount}
                   className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-all duration-300"
