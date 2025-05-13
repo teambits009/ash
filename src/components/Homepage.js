@@ -8,20 +8,16 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleDonate = async () => {
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent-handle-donate/`, {
-        source: 'Techops',
-        timestamp: new Date().toISOString(),
-      });
-      alert('Donation request sent successfully!');
-      console.log('Donation response:', response.data);
-    } catch (error) {
-      alert('Failed to process donation. Please try again.');
-      console.error('Donation error:', error);
+
+  const scrollToJoinUs = () => {
+    const element = document.getElementById('join-us');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsOpen(false);
   };
+
+
 
   return (
     <nav className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 sticky top-0 z-20 shadow-lg">
@@ -60,7 +56,7 @@ const NavBar = () => {
             </a>
           ))}
           <button
-            onClick={handleDonate}
+            onClick={scrollToJoinUs}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
           >
             Donate Now
@@ -82,7 +78,7 @@ const NavBar = () => {
             </a>
           ))}
           <button
-            onClick={handleDonate}
+            onClick={scrollToJoinUs}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
           >
             Donate Now
