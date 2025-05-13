@@ -10,8 +10,8 @@ const NavBar = () => {
 
   const handleDonate = async () => {
     try {
-      const response = await axios.post('create-payment-intent/', {
-        source: 'navbar',
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent-handle-donate/`, {
+        source: 'Techops',
         timestamp: new Date().toISOString(),
       });
       alert('Donation request sent successfully!');
@@ -96,7 +96,7 @@ const NavBar = () => {
 const Hero = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post('create-payment-intent/', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'hero',
         timestamp: new Date().toISOString(),
@@ -120,7 +120,7 @@ const Hero = () => {
         </p>
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Every Dollar Makes a Difference</h2>
         <div className="flex flex-wrap justify-center gap-4">
-          {['3', '5', '10', '50'].map(amount => (
+          {['50', '100', '150', '200'].map(amount => (
             <button
               key={amount}
               className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
@@ -287,7 +287,7 @@ const OurProjects = () => {
 const GetInvolved = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post('create-payment-intent/', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'get-involved',
         timestamp: new Date().toISOString(),
