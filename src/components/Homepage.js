@@ -8,19 +8,31 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
-  const scrollToJoinUs = () => {
-    const element = document.getElementById('join-us');
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsOpen(false);
+    setIsOpen(false); // Close mobile menu after clicking
   };
+
+  const navItems = [
+    { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
+    { name: 'Impact', id: 'impact' },
+    { name: 'Work', id: 'work' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Join Us', id: 'join-us' },
+    { name: 'Contact', id: 'contact' },
+  ];
 
   return (
     <nav className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 sticky top-0 z-20 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-3xl font-extrabold tracking-tight">
-          <img src="/images/ashmay.jpg" alt="Ashamay Foundation logo" width="50" height="60" />
+          <a href="#home" onClick={() => scrollToSection('home')}>
+            <img src="/images/ashmay.jpg" alt="Ashmay Foundation logo" width="50" height="60" />
+          </a>
         </div>
         <button
           className="md:hidden focus:outline-none"
@@ -43,39 +55,40 @@ const NavBar = () => {
           </svg>
         </button>
         <div className="hidden md:flex items-center space-x-8">
-          {['Home', 'About', 'Impact', 'Work', 'Projects', 'Join Us', 'Contact'].map((item, index) => (
+          {navItems.map((item, index) => (
             <a
               key={index}
-              href={`#£{item.toLowerCase().replace(' ', '-')}`}
+              href={`#${item.id}`}
+              onClick={() => scrollToSection(item.id)}
               className="text-lg hover:text-yellow-300 transition-colors duration-300"
             >
-              {item}
+              {item.name}
             </a>
           ))}
           <button
-            onClick={scrollToJoinUs}
+            onClick={() => scrollToSection('join-us')}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
           >
             Donate Now
           </button>
         </div>
         <div
-          className={`md:hidden absolute top-16 left-0 right-0 bg-blue-900 text-white flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out £{
+          className={`md:hidden absolute top-16 left-0 right-0 bg-blue-900 text-white flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out ${
             isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
         >
-          {['Home', 'About', 'Impact', 'Work', 'Projects', 'Join Us', 'Contact'].map((item, index) => (
+          {navItems.map((item, index) => (
             <a
               key={index}
-              href={`#£{item.toLowerCase().replace(' ', '-')}`}
+              href={`#${item.id}`}
+              onClick={() => scrollToSection(item.id)}
               className="text-lg hover:text-yellow-300 transition-colors duration-300"
-              onClick={() => setIsOpen(false)}
             >
-              {item}
+              {item.name}
             </a>
           ))}
           <button
-            onClick={scrollToJoinUs}
+            onClick={() => scrollToSection('join-us')}
             className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-colors duration-300"
           >
             Donate Now
@@ -89,12 +102,12 @@ const NavBar = () => {
 const Hero = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post(`£{process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'hero',
         timestamp: new Date().toISOString(),
       });
-      alert(`Successfully processed ££{amount} donation!`);
+      alert(`Successfully processed $${amount} donation!`);
       console.log('Donation response:', response.data);
     } catch (error) {
       alert('Failed to process donation. Please try again.');
@@ -115,7 +128,7 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl animate-fade-in-delay">
           A single act of kindness can light up a child’s future. Join us in empowering orphans across Africa with love, care, and opportunity.
         </p>
-        <h2 className="text-2xl font-semibold text-white mb-6">Every Pound Makes a Difference</h2>
+        <h2 className="text-2xl font-semibold text-white mb-6">Every Dollar Makes a Difference</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {['50', '100', '150', '200'].map(amount => (
             <button
@@ -123,7 +136,7 @@ const Hero = () => {
               className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
               onClick={() => handleDonate(amount)}
             >
-              £{amount}
+              ${amount}
             </button>
           ))}
         </div>
@@ -284,12 +297,12 @@ const OurProjects = () => {
 const GetInvolved = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post(`£{process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'get-involved',
         timestamp: new Date().toISOString(),
       });
-      alert(`Successfully processed ££{amount} donation!`);
+      alert(`Successfully processed $${amount} donation!`);
       console.log('Donation response:', response.data);
     } catch (error) {
       alert('Failed to process donation. Please try again.');
@@ -312,7 +325,7 @@ const GetInvolved = () => {
                   className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-all duration-300"
                   onClick={() => handleDonate(amount)}
                 >
-                  £{amount}
+                  ${amount}
                 </button>
               ))}
             </div>
@@ -396,7 +409,7 @@ const FollowUs = () => {
           {['Facebook', 'Instagram', 'Twitter', 'LinkedIn'].map(platform => (
             <a
               key={platform}
-              href={`https://£{platform.toLowerCase()}.com`}
+              href={`https://${platform.toLowerCase()}.com`}
               className="text-blue-600 hover:text-blue-800 text-lg font-semibold transition-colors duration-300"
             >
               {platform}
