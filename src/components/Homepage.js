@@ -8,7 +8,6 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
-
   const scrollToJoinUs = () => {
     const element = document.getElementById('join-us');
     if (element) {
@@ -16,8 +15,6 @@ const NavBar = () => {
     }
     setIsOpen(false);
   };
-
-
 
   return (
     <nav className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 sticky top-0 z-20 shadow-lg">
@@ -106,16 +103,19 @@ const Hero = () => {
   };
 
   return (
-      <section id="home"className="bg-gradient-to-b from-gray-100 to-white py-24 bg-cover bg-center"
-      style={{ backgroundImage: `url('/images/landing.jpg')` }}>
-      <div className="container mx-auto flex flex-col items-center text-center px-4">
-        <h1 className="text-5xl md:text-6xl font-bold text-white-800 mb-6 leading-tight animate-fade-in">
+    <section
+      id="home"
+      className="bg-gradient-to-b from-gray-100 to-white py-24 bg-cover bg-center"
+      style={{ backgroundImage: `url('/images/landing.jpg')` }}
+    >
+      <div className="container mx-auto flex flex-col items-center text-center px-4 bg-black bg-opacity-50 py-12">
+        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in">
           Transform Lives with Ashmay Foundation
         </h1>
-        <p className="text-xl md:text-2xl text-white-600 mb-8 max-w-3xl animate-fade-in-delay">
+        <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl animate-fade-in-delay">
           A single act of kindness can light up a child’s future. Join us in empowering orphans across Africa with love, care, and opportunity.
         </p>
-        <h2 className="text-2xl font-semibold text-white-800 mb-6">Every Dollar Makes a Difference</h2>
+        <h2 className="text-2xl font-semibold text-white mb-6">Every Dollar Makes a Difference</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {['50', '100', '150', '200'].map(amount => (
             <button
@@ -378,7 +378,7 @@ const ContactUs = () => {
           <p>
             <strong>Phone:</strong>{' '}
             <a href="tel:+447926577057" className="text-blue-600 hover:text-blue-800 transition-colors">
-            +44 7891403783
+              +44 7891403783
             </a>
           </p>
         </div>
@@ -413,7 +413,7 @@ const Footer = () => {
     <footer className="bg-blue-900 text-white py-8">
       <div className="container mx-auto flex flex-col items-center text-center px-4">
         <p className="text-lg">Copyright © 2025 Ashmay Foundation. All rights reserved.</p>
-        <p className="text-sm mt-2">Registered Charity No:+44 7891403783</p>
+        <p className="text-sm mt-2">Registered Charity No: +44 7891403783</p>
         <div className="flex justify-center gap-6 mt-4">
           <a href="#Privacy" className="hover:text-yellow-300 transition-colors duration-300">
             Privacy Policy
