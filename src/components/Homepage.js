@@ -115,7 +115,7 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl animate-fade-in-delay">
           A single act of kindness can light up a child’s future. Join us in empowering orphans across Africa with love, care, and opportunity.
         </p>
-        <h2 className="text-2xl font-semibold text-white mb-6">Every Dollar Makes a Difference</h2>
+        <h2 className="text-2xl font-semibold text-white mb-6">Every Pound Makes a Difference</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {['50', '100', '150', '200'].map(amount => (
             <button
