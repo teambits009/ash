@@ -46,7 +46,7 @@ const NavBar = () => {
           {['Home', 'About', 'Impact', 'Work', 'Projects', 'Join Us', 'Contact'].map((item, index) => (
             <a
               key={index}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
+              href={`#£{item.toLowerCase().replace(' ', '-')}`}
               className="text-lg hover:text-yellow-300 transition-colors duration-300"
             >
               {item}
@@ -60,14 +60,14 @@ const NavBar = () => {
           </button>
         </div>
         <div
-          className={`md:hidden absolute top-16 left-0 right-0 bg-blue-900 text-white flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out ${
+          className={`md:hidden absolute top-16 left-0 right-0 bg-blue-900 text-white flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out £{
             isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
         >
           {['Home', 'About', 'Impact', 'Work', 'Projects', 'Join Us', 'Contact'].map((item, index) => (
             <a
               key={index}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
+              href={`#£{item.toLowerCase().replace(' ', '-')}`}
               className="text-lg hover:text-yellow-300 transition-colors duration-300"
               onClick={() => setIsOpen(false)}
             >
@@ -89,12 +89,12 @@ const NavBar = () => {
 const Hero = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
+      const response = await axios.post(`£{process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'hero',
         timestamp: new Date().toISOString(),
       });
-      alert(`Successfully processed $${amount} donation!`);
+      alert(`Successfully processed ££{amount} donation!`);
       console.log('Donation response:', response.data);
     } catch (error) {
       alert('Failed to process donation. Please try again.');
@@ -123,7 +123,7 @@ const Hero = () => {
               className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
               onClick={() => handleDonate(amount)}
             >
-              ${amount}
+              £{amount}
             </button>
           ))}
         </div>
@@ -284,12 +284,12 @@ const OurProjects = () => {
 const GetInvolved = () => {
   const handleDonate = async (amount) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
+      const response = await axios.post(`£{process.env.REACT_APP_API_BASE_URL}/api/payments/create-payment-intent/`, {
         amount: parseInt(amount),
         source: 'get-involved',
         timestamp: new Date().toISOString(),
       });
-      alert(`Successfully processed $${amount} donation!`);
+      alert(`Successfully processed ££{amount} donation!`);
       console.log('Donation response:', response.data);
     } catch (error) {
       alert('Failed to process donation. Please try again.');
@@ -312,7 +312,7 @@ const GetInvolved = () => {
                   className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-all duration-300"
                   onClick={() => handleDonate(amount)}
                 >
-                  ${amount}
+                  £{amount}
                 </button>
               ))}
             </div>
@@ -396,7 +396,7 @@ const FollowUs = () => {
           {['Facebook', 'Instagram', 'Twitter', 'LinkedIn'].map(platform => (
             <a
               key={platform}
-              href={`https://${platform.toLowerCase()}.com`}
+              href={`https://£{platform.toLowerCase()}.com`}
               className="text-blue-600 hover:text-blue-800 text-lg font-semibold transition-colors duration-300"
             >
               {platform}
